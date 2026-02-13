@@ -169,10 +169,9 @@ class Command(BaseCommand):
                     '_id': activity_id,
                     'user_id': user['_id'],
                     'activity_type': random.choice(activity_types),
-                    'duration_minutes': random.randint(20, 90),
-                    'distance_km': round(random.uniform(2, 15), 2),
-                    'calories_burned': random.randint(150, 800),
-                    'points_earned': random.randint(50, 200),
+                    'duration': random.randint(20, 90),
+                    'distance': round(random.uniform(2, 15), 2),
+                    'calories': random.randint(150, 800),
                     'date': datetime.now() - timedelta(days=days_ago),
                     'notes': f'Training session for {user["first_name"]}'
                 })
@@ -185,73 +184,83 @@ class Command(BaseCommand):
         self.stdout.write('Inserting workouts...')
         workouts = [
             {
-                '_id': 1,
+                '_id': '1',
                 'name': 'Hero Training Basics',
                 'description': 'Start your hero journey with basic exercises',
-                'difficulty': 'Beginner',
-                'duration_minutes': 30,
+                'difficulty_level': 'Beginner',
+                'duration': 30,
+                'activity_type': 'Strength',
                 'exercises': [
                     {'name': 'Push-ups', 'sets': 3, 'reps': 10},
                     {'name': 'Squats', 'sets': 3, 'reps': 15},
                     {'name': 'Plank', 'sets': 3, 'duration': '30 seconds'}
                 ],
-                'category': 'Strength',
+                'target_muscle_groups': ['chest', 'legs', 'core'],
+                'equipment_needed': ['none'],
                 'created_at': datetime.now()
             },
             {
-                '_id': 2,
+                '_id': '2',
                 'name': 'Speed Force Training',
                 'description': 'Increase your speed and agility like The Flash',
-                'difficulty': 'Intermediate',
-                'duration_minutes': 45,
+                'difficulty_level': 'Intermediate',
+                'duration': 45,
+                'activity_type': 'Cardio',
                 'exercises': [
                     {'name': 'Sprint Intervals', 'sets': 5, 'duration': '30 seconds'},
                     {'name': 'Ladder Drills', 'sets': 4, 'reps': 10},
                     {'name': 'Box Jumps', 'sets': 3, 'reps': 12}
                 ],
-                'category': 'Cardio',
+                'target_muscle_groups': ['legs', 'cardio'],
+                'equipment_needed': ['ladder', 'box'],
                 'created_at': datetime.now()
             },
             {
-                '_id': 3,
+                '_id': '3',
                 'name': 'Super Strength Builder',
                 'description': 'Build superhuman strength with this advanced workout',
-                'difficulty': 'Advanced',
-                'duration_minutes': 60,
+                'difficulty_level': 'Advanced',
+                'duration': 60,
+                'activity_type': 'Strength',
                 'exercises': [
                     {'name': 'Deadlifts', 'sets': 4, 'reps': 8},
                     {'name': 'Bench Press', 'sets': 4, 'reps': 8},
                     {'name': 'Pull-ups', 'sets': 4, 'reps': 10}
                 ],
-                'category': 'Strength',
+                'target_muscle_groups': ['back', 'chest', 'arms'],
+                'equipment_needed': ['barbell', 'bench', 'pull-up bar'],
                 'created_at': datetime.now()
             },
             {
-                '_id': 4,
+                '_id': '4',
                 'name': 'Amazonian Warrior Workout',
                 'description': 'Train like Wonder Woman with this warrior routine',
-                'difficulty': 'Intermediate',
-                'duration_minutes': 50,
+                'difficulty_level': 'Intermediate',
+                'duration': 50,
+                'activity_type': 'Combat',
                 'exercises': [
                     {'name': 'Sword Swings (with weight)', 'sets': 3, 'reps': 15},
                     {'name': 'Shield Pushes (resistance)', 'sets': 3, 'reps': 12},
                     {'name': 'Battle Rope Waves', 'sets': 4, 'duration': '45 seconds'}
                 ],
-                'category': 'Combat',
+                'target_muscle_groups': ['arms', 'shoulders', 'core'],
+                'equipment_needed': ['weighted bar', 'battle rope'],
                 'created_at': datetime.now()
             },
             {
-                '_id': 5,
+                '_id': '5',
                 'name': 'Asgardian Endurance',
                 'description': 'Build godly endurance with Thor-inspired exercises',
-                'difficulty': 'Advanced',
-                'duration_minutes': 55,
+                'difficulty_level': 'Advanced',
+                'duration': 55,
+                'activity_type': 'Strength',
                 'exercises': [
                     {'name': 'Hammer Curls', 'sets': 4, 'reps': 12},
                     {'name': 'Battle Rope Slams', 'sets': 4, 'duration': '40 seconds'},
                     {'name': 'Farmer Walks', 'sets': 3, 'distance': '50 meters'}
                 ],
-                'category': 'Strength & Endurance',
+                'target_muscle_groups': ['arms', 'grip', 'core'],
+                'equipment_needed': ['dumbbells', 'battle rope', 'kettlebells'],
                 'created_at': datetime.now()
             }
         ]
@@ -264,17 +273,21 @@ class Command(BaseCommand):
         sorted_users = sorted(users, key=lambda x: x['total_points'], reverse=True)
         
         for rank, user in enumerate(sorted_users, start=1):
-            team_name = 'Team Marvel' if user['team_id'] == 1 else 'Team DC'
+            user_activities = [a for a in activities if a['user_id'] == user['_id']]
+            total_duration = sum(a['duration'] for a in user_activities)
+            total_distance = sum(a['distance'] for a in user_activities)
+            total_calories = sum(a['calories'] for a in user_activities)
+            
             leaderboard.append({
                 '_id': rank,
                 'rank': rank,
                 'user_id': user['_id'],
                 'username': user['username'],
-                'full_name': f"{user['first_name']} {user['last_name']}",
-                'team_id': user['team_id'],
-                'team_name': team_name,
-                'total_points': user['total_points'],
-                'activities_count': len([a for a in activities if a['user_id'] == user['_id']]),
+                'total_activities': len(user_activities),
+                'total_duration': total_duration,
+                'total_distance': round(total_distance, 2),
+                'total_calories': total_calories,
+                'points': user['total_points'],
                 'last_updated': datetime.now()
             })
         

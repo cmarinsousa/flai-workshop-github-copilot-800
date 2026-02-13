@@ -56,6 +56,9 @@ class LeaderboardSerializer(serializers.ModelSerializer):
 
 class WorkoutSerializer(serializers.ModelSerializer):
     id = serializers.CharField(source='_id', read_only=True)
+    exercises = serializers.SerializerMethodField()
+    target_muscle_groups = serializers.SerializerMethodField()
+    equipment_needed = serializers.SerializerMethodField()
     
     class Meta:
         model = Workout
@@ -64,3 +67,12 @@ class WorkoutSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             '_id': {'read_only': True}
         }
+    
+    def get_exercises(self, obj):
+        return obj.get_exercises()
+    
+    def get_target_muscle_groups(self, obj):
+        return obj.get_target_muscle_groups()
+    
+    def get_equipment_needed(self, obj):
+        return obj.get_equipment_needed()

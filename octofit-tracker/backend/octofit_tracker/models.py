@@ -1,5 +1,6 @@
 from django.db import models
 from bson import ObjectId
+import json
 
 
 class User(models.Model):
@@ -81,9 +82,9 @@ class Workout(models.Model):
     activity_type = models.CharField(max_length=50)
     difficulty_level = models.CharField(max_length=20)  # beginner, intermediate, advanced
     duration = models.IntegerField()  # in minutes
-    exercises = models.JSONField(default=list)
-    target_muscle_groups = models.JSONField(default=list)
-    equipment_needed = models.JSONField(default=list)
+    exercises = models.TextField(default='[]')  # Stored as JSON string
+    target_muscle_groups = models.TextField(default='[]')  # Stored as JSON string
+    equipment_needed = models.TextField(default='[]')  # Stored as JSON string
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -91,3 +92,21 @@ class Workout(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.difficulty_level}"
+    
+    def get_exercises(self):
+        """Parse exercises from JSON string or return list if already parsed"""
+        if isinstance(self.exercises, str):
+            return json.loads(self.exercises)
+        return self.exercises
+    
+    def get_target_muscle_groups(self):
+        """Parse target_muscle_groups from JSON string or return list if already parsed"""
+        if isinstance(self.target_muscle_groups, str):
+            return json.loads(self.target_muscle_groups)
+        return self.target_muscle_groups
+    
+    def get_equipment_needed(self):
+        """Parse equipment_needed from JSON string or return list if already parsed"""
+        if isinstance(self.equipment_needed, str):
+            return json.loads(self.equipment_needed)
+        return self.equipment_needed
