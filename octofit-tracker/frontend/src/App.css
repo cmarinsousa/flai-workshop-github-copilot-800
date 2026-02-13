@@ -1,0 +1,290 @@
+/* Global Styles */
+body {
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  color: #2c3e50;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* Navigation */
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: none;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2c3e50 !important;
+  transition: color 0.2s ease;
+}
+
+.navbar-brand:hover {
+  color: #3498db !important;
+}
+
+.navbar-logo {
+  height: 32px;
+  width: auto;
+}
+
+.nav-link {
+  font-weight: 400;
+  color: #6c757d !important;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #3498db !important;
+}
+
+/* Container */
+.container, .container-fluid {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Table Styles */
+.table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table thead th {
+  border: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  padding: 1rem;
+  color: #495057;
+  text-transform: uppercase;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  color: #495057;
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: #3498db;
+}
+
+.card-title {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-text {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-size: 0.9375rem;
+}
+
+.btn-primary {
+  background: #3498db;
+  border-color: #3498db;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+  border-color: #2980b9;
+}
+
+.btn-success {
+  background: #27ae60;
+  border-color: #27ae60;
+  color: white !important;
+}
+
+.btn-success:hover {
+  background: #229954;
+  border-color: #229954;
+}
+
+.btn-info {
+  background: #16a085;
+  border-color: #16a085;
+  color: white !important;
+}
+
+.btn-info:hover {
+  background: #138d75;
+  border-color: #138d75;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  border-color: #e74c3c;
+  color: white !important;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+  border-color: #c0392b;
+}
+
+/* Badge Styles */
+.badge {
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.badge.bg-primary {
+  background: #3498db !important;
+}
+
+.badge.bg-success {
+  background: #27ae60 !important;
+}
+
+.badge.bg-warning {
+  background: #f39c12 !important;
+  color: white !important;
+}
+
+.badge.bg-info {
+  background: #16a085 !important;
+}
+
+/* Alert Styles */
+.alert {
+  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 1rem 1.25rem;
+}
+
+.alert-danger {
+  background-color: #fadbd8;
+  border-color: #e74c3c;
+  color: #c0392b;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #2980b9;
+}
+
+/* Spinner */
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  color: #3498db;
+}
+
+/* Lists */
+.list-unstyled li {
+  padding: 0.5rem 0;
+  color: #6c757d;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.list-unstyled li:last-child {
+  border-bottom: none;
+}
+
+.list-unstyled li strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Welcome Page */
+.lead {
+  color: #6c757d;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.display-4 {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container, .container-fluid {
+    padding: 1.5rem;
+  }
+  
+  .table tbody td, .table thead th {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
